@@ -1,5 +1,6 @@
 //Importo modelo de datos
 const mascotas = require('../Models/Mascotas');
+const users = require('../models/Users');
 
 const MascotasController = {};
 
