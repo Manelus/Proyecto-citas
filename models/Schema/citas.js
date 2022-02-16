@@ -1,15 +1,23 @@
 const mongoose = require('mongoose');
 
 const CitasModel = new mongoose.Schema({
-    id: {
+    fecha: {
         type: String,
         required: true
     },
-    tipo: {
+    Nombre_mascota: {
         type: String,
         required: true,
     },
-    raza: {
+    Dolencias: {
+        type: String,
+        required: true,
+    },
+    id_mascota: {
+        type: String,
+        required: true,
+    },
+    id_duenyo: {
         type: String,
         required: true,
     }
