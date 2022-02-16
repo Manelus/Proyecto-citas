@@ -10,3 +10,5 @@ const auth = require('../middleware/auth');
 
 
 router.post('/cita', Citas.CitasRegister);
+
+module.exports = router;
