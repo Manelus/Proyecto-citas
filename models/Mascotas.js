@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const MascotaModel = require('./Schema/Mascotas');
 
-const MascotasModel = mongoose.model('Movies', MascotaModel);
+const MascotasModel = mongoose.model('Mascotas', MascotaModel);
 
 module.exports = MascotasModel;

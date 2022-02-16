@@ -1,14 +1,7 @@
 
 const mongoose = require('mongoose');
-const MascotaModel = require('./Schema/Mascotas');
+const CitasModel = require('./Schema/Citas');
 
-const MascotasModel = mongoose.model('Movies', MascotaModel);
+const CitasModel = mongoose.model('Citas', CitasModel);
 
-module.exports = MascotasModel;
-
-
-
-
-router.post('/cita', Citas.CitasRegister);
-
-
+module.exports = CitasModel;

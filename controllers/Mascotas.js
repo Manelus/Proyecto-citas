@@ -13,9 +13,9 @@ MascotasController.getById = (req, res) => {
     res.json(mascotas.findById(id));
 };
 
-exports.mascotaRegister = async (req, res) => {
+MascotasController.mascotaRegister = async (req, res) => {
     
-    const {id, nombre, tipo, raza, idUser} = {...req.body}
+    const {nombre, tipo, raza, idUser} = {...req.body}
     const mascota = await mascotas.findByCredentials({id: id});
     
     if (mascota !== null) { return res.status(401).json({message: 'Mascota Incorrecto'}); }
@@ -26,7 +26,7 @@ exports.mascotaRegister = async (req, res) => {
     res.status(200).json({message: 'Mascota registrada'});
 }
 
-exports.mascotaDelete = async (req, res, next) => {
+MascotasController.mascotaDelete = async (req, res, next) => {
     try {
       const result = await mascotas.remove({ _id: req.params.id});
       (result > 0) ? res.status(204).json({}) : res.status(200).json({message: "El usuario a sido elimnado correctamente."});
@@ -34,6 +34,3 @@ exports.mascotaDelete = async (req, res, next) => {
       res.status(500).json({message: "Eliminacion incorrecta."});
     }
 }
-
-
-module.exports = MascotasController;
