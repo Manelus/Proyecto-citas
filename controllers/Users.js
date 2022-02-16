@@ -4,27 +4,27 @@ const UsersController = {};
 
 
 UsersController.getAll = async function (req, res) {
-    const user = await users.find({});
+    const user = await users.findAll({});
     let result = (users.length > 0)? user: [{}];
     res.status(200).json(result);
 }
 
 UsersController.getById = async function(req, res) {
-    const user = await users.findOne({_id: req.params.id});
+    const user = await users.find({_id: req.params.id});
     let result = (user !== null)? user: {};
     res.status(200).json(result);
 }
 
 UsersController.userRegister = async (req, res) => {
     
-    const { nombre, apellido, mail, password } = {...req.body}
-    const user = await users.findByCredentials({mail: mail});
+    const { nombre, apellido, email, password } = {...req.body}
+    const user = await users.findByCredentials({mail: email});
     
     if (user !== null) { return res.status(401).json({message: 'Mail Incorrecto'}); }
     
     if (password.length < 6 ) return res.status(401).json({message: 'Password incorrecto, introduce uno correcto'});
         
-    let users = await users.create({id: id, nombre: nombre,apellido: apellido, mail: mail, password: password})
+    let users = await users.create({id: id, nombre: nombre,apellido: apellido, email: email, password: password})
     if( users === null) return res.status(500).json({message: 'Error interno, contacte con el admin'})
     res.status(200).json({message: 'Usuario registrado'});
 }

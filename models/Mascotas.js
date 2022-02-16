@@ -9,10 +9,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Mascota.belongsTo(models.user,{
+        foreignKey: 'userId'
+      });
+      Mascota.belongsTo(models.citas,{
+        foreignKey: 'mascotaId'
+      });
     }
   }
   Mascota.init({
-    title: DataTypes.STRING
+    
+    idMascota: DataTypes.INTEGER,
+    nombre: DataTypes.STRING,
+    tipo: DataTypes.STRING,
+    raza: DataTypes.STRING,
+    idUser: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Mascota',
