@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       usuarios.belongsTo(models.mascotas,{
         foreignKey: 'idUser'
       });
+
     }
   }
   usuarios.init({

@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      citas.belongsTo(models.citas,{
+        foreignKey: 'idVeterinario'
+      });
     }
+    
   }
   veterinarios.init({
     idVeterinario: DataTypes.INTEGER,

@@ -18,7 +18,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       idUser: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "cascade",
+        reference:{
+          model:"usuarios",
+          key:"idUser"
+        }
       },
       createdAt: {
         allowNull: false,
