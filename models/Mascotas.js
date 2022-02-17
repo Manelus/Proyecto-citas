@@ -10,16 +10,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Mascota.hasOne(models.usuarios,{
-        foreignKey: 'idUser'
+        foreignKey: 'id'
       });
       Mascota.belongsTo(models.citas,{
-        foreignKey: 'mascotaId'
+        foreignKey: 'id'
       });
     }
   }
   Mascota.init({
     
-    idMascota: DataTypes.INTEGER,
+    id: DataTypes.INTEGER,
     nombre: DataTypes.STRING,
     tipo: DataTypes.STRING,
     raza: DataTypes.STRING,

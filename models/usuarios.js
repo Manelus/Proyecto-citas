@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      usuarios.belongsTo(models.mascotas,{
+      usuarios.hasMany(models.mascotas,{
         foreignKey: 'idUser'
       });
 
     }
   }
   usuarios.init({
-    idUser: DataTypes.INTEGER,
+    id: DataTypes.INTEGER,
     nombre: DataTypes.STRING,
     apellido: DataTypes.STRING,
     email: DataTypes.STRING,

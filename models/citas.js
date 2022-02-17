@@ -12,18 +12,18 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       citas.hasOne(models.mascotas,{
-        foreignKey: 'idMascota'
+        foreignKey: 'id'
       });
       citas.hasOne(models.veterinario,{
-        foreignKey: 'idVeterinario'
+        foreignKey: 'id'
       });
       citas.hasOne(models.usuarios,{
-        foreignKey: 'idUser'
+        foreignKey: 'id'
       });
     }
   }
   citas.init({
-    idCita: DataTypes.INTEGER,
+    id: DataTypes.INTEGER,
     idMascota: DataTypes.INTEGER,
     idUser: DataTypes.INTEGER,
     diaCita: DataTypes.INTEGER,

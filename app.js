@@ -32,6 +32,7 @@ app.use("/", indexRouter);
 app.use("/users", Users);
 app.use("/mascotas", Mascotas);
 app.use("/citas", Citas);
+app.use("/veterinario", Veterinario )
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

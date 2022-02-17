@@ -2,7 +2,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Mascota', {
-      idMascota: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -22,7 +22,8 @@ module.exports = {
         onDelete: "cascade",
         reference:{
           model:"usuarios",
-          key:"idUser"
+          key:"id",
+          as: "idUser"
         }
       },
       createdAt: {

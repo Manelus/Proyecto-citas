@@ -1,2 +1,3 @@
-const mascotas = require('../Models/Mascotas');
-const users = require('../models/Users');
+const mascotas = require('../models/Mascotas');
+const users = require('../models/usuarios');
+const veterinario = require('../models/veterinarios');
