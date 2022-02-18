@@ -18,10 +18,16 @@ UsersController.getById = async function(req, res) {
 }
 
 UsersController.userRegister = async (req, res) => {
+<<<<<<< HEAD
     const {nombre, apellido, email, password} = req.body;
     console.log(users);
     const userExists = await users.findOne({where:{email: email}});
     const cryptPass = bcrypt.hash(password,  8);
+=======
+    const {email, apellido, nombre, password} = {...req.body};
+    const userExists = await users.findOne({email: email});
+    const cryptPass = bcrypt.hashSync
+>>>>>>> a052ba30cc8a916acf9b685a57fb6338ca4a94e6
  
     if (userExists !== null) { return res.status(401).json({message: 'email incorrecto'})};
   
