@@ -11,21 +11,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      citas.hasOne(models.mascotas,{
-        foreignKey: 'id'
+      citas.belongsTo(models.mascotas,{
+        foreignKey: 'idMascota'
       });
-      citas.hasOne(models.veterinario,{
-        foreignKey: 'id'
+      citas.belongsTo(models.veterinarios,{
+        foreignKey: 'idVeterinario'
       });
-      citas.hasOne(models.usuarios,{
-        foreignKey: 'id'
+      citas.belongsTo(models.usuarios,{
+        foreignKey: 'idUser'
       });
     }
   }
   citas.init({
-    id: DataTypes.INTEGER,
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     idMascota: DataTypes.INTEGER,
     idUser: DataTypes.INTEGER,
+    idVeterinario: DataTypes.INTEGER,
     diaCita: DataTypes.INTEGER,
     horaCita: DataTypes.INTEGER
   }, {

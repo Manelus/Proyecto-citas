@@ -1,7 +1,6 @@
-const users = require('../models/usuarios');
-const {v4: uuidv4} = require('uuid')
+const users = require('../models').usuarios;
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+
 
 const UsersController = {};
 
@@ -19,15 +18,16 @@ UsersController.getById = async function(req, res) {
 }
 
 UsersController.userRegister = async (req, res) => {
-    const {email, apellido, name, password} = {...req.body};
-    const userExists = await users.findOne({email: email});
-    const cryptPass = bcrypt.hashSync
+    const {nombre, apellido, email, password} = req.body;
+    console.log(users);
+    const userExists = await users.findOne({where:{email: email}});
+    const cryptPass = bcrypt.hash(password,  8);
  
-    if (userExists !== null) { return res.status(401).json({message: 'email incorrecto'}); }
+    if (userExists !== null) { return res.status(401).json({message: 'email incorrecto'})};
   
     if (password.length < 6 ) return res.status(401).json({message: 'password incorrecto. Debe tener almenos 6 caracteres.'});
     
-    const user = await users.create({id: id, nombre: nombre,apellido: apellido, email: email, password: cryptPass})
+    const user = await users.create({nombre: nombre, apellido: apellido, email: email, password: cryptPass});
   
     if( user === null) return res.status(500).json({message: 'Internal error. Please, let you contact with the administrator'})
     res.status(204).json({message: 'User created!!!!'});
