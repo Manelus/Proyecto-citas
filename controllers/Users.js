@@ -19,7 +19,7 @@ UsersController.getById = async function(req, res) {
 }
 
 UsersController.userRegister = async (req, res) => {
-    const {email, apellido, name, password} = {...req.body};
+    const {email, apellido, nombre, password} = {...req.body};
     const userExists = await users.findOne({email: email});
     const cryptPass = bcrypt.hashSync
  
