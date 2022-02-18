@@ -27,7 +27,7 @@ module.exports = {
         }
       },
       diaCita: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DATE
       },
       horaCita: {
         type: Sequelize.INTEGER

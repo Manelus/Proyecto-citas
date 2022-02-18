@@ -9,6 +9,6 @@ router.get('/id/:id', MascotasController.getById);
 
 router.post('/register', MascotasController.mascotaRegister);
 
-router.delete('/:id', [auth, admin], UsersController.mascotaDelete)
+router.delete('/:id', MascotasController.mascotaDelete)
 
 module.exports = router;

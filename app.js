@@ -3,20 +3,21 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var mongoose = require("mongoose");
 
 //Inport Routing
 // var MascotasRouter = require("./routes/Mascotas");
-var UsersRouter = require("./routes/Users");
-
-
-require('dotenv').config();
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/usuarios");
+var mascotasRouter = require("./routes/mascotas");
+var citasRouter = require("./routes/citas");
+var veterinarioRouter = require("./routes/veterinarios");
 
 console.log(process.env.PORT)
 
-connect();
+//connect();
 
 var app = express();
+const PORT = process.env.PORT || 3000;
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -29,10 +30,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 //Load Routing 
 app.use("/", indexRouter);
-app.use("/users", Users);
-app.use("/mascotas", Mascotas);
-app.use("/citas", Citas);
-app.use("/veterinario", Veterinario )
+app.use("/usuarios", usersRouter);
+app.use("/mascotas", mascotasRouter);
+app.use("/citas", citasRouter);
+app.use("/veterinario", veterinarioRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -51,24 +52,6 @@ app.use(function (err, req, res, next) {
   res.json({error: "error"});
 });
 
-function listen() {
-  //if (app.get('env') === 'test') return;
-  //app.listen(port);
-  //console.log('Express app started on port ' + port);
-}
-
-function connect() {
-  try {
-    mongoose.connection
-      .on("error", console.log)
-      .on("disconnected", connect)
-      .once("open", listen);
-    var connection = require('./config/mongoose');
-    return connection;
-  } catch (e) {
-    console.log(e.message);
-  }
-}
-
+app.listen(PORT, () => { console.log(`App corriendo en el puerto: ${PORT}`)})
 
 module.exports = app;

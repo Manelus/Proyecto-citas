@@ -1,14 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var pedidoModel = require('../models/pedidoModel');
-var MovieModel = require('../models/MovieModel');
-var UserModel = require('../models/User');
-var users = require('./users');
-var movies = require('./movieRouter');
 
-const auth = require('../middleware/auth'); 
+var CitasControllers = require('../controllers/citas');
+ 
+router.get('/', CitasControllers.getall)
 
-
-router.post('/cita', Citas.CitasRegister);
+router.post('/register', CitasControllers.citaRegister);
 
 module.exports = router;

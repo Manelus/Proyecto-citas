@@ -1,4 +1,7 @@
-const users = require('../models/Users');
+const users = require('../models/usuarios');
+const {v4: uuidv4} = require('uuid')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const UsersController = {};
 
@@ -16,17 +19,18 @@ UsersController.getById = async function(req, res) {
 }
 
 UsersController.userRegister = async (req, res) => {
+    const {email, apellido, name, password} = {...req.body};
+    const userExists = await users.findOne({email: email});
+    const cryptPass = bcrypt.hashSync
+ 
+    if (userExists !== null) { return res.status(401).json({message: 'email incorrecto'}); }
+  
+    if (password.length < 6 ) return res.status(401).json({message: 'password incorrecto. Debe tener almenos 6 caracteres.'});
     
-    const { nombre, apellido, email, password } = {...req.body}
-    const user = await users.findByCredentials({mail: email});
-    
-    if (user !== null) { return res.status(401).json({message: 'Mail Incorrecto'}); }
-    
-    if (password.length < 6 ) return res.status(401).json({message: 'Password incorrecto, introduce uno correcto'});
-        
-    let users = await users.create({id: id, nombre: nombre,apellido: apellido, email: email, password: password})
-    if( users === null) return res.status(500).json({message: 'Error interno, contacte con el admin'})
-    res.status(200).json({message: 'Usuario registrado'});
+    const user = await users.create({id: id, nombre: nombre,apellido: apellido, email: email, password: cryptPass})
+  
+    if( user === null) return res.status(500).json({message: 'Internal error. Please, let you contact with the administrator'})
+    res.status(204).json({message: 'User created!!!!'});
 }
 
 UsersController.userLogin = async (req, res) => {
