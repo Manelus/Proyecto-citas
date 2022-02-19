@@ -3,6 +3,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+require("dotenv").config();
 
 //Inport Routing
 // var MascotasRouter = require("./routes/Mascotas");
@@ -33,7 +34,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usersRouter);
 app.use("/mascotas", mascotasRouter);
 app.use("/citas", citasRouter);
-app.use("/veterinario", veterinarioRouter);
+app.use("/veterinarios", veterinarioRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

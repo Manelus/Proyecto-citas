@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
+const auth = require('../middleware/auth');
 
-const MascotasController = require('../controllers/Mascotas');
-
+const MascotasController = require('../controllers/mascotas');
+ 
 router.get('/', MascotasController.getAll);
 
 router.get('/id/:id', MascotasController.getById);

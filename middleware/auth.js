@@ -1,16 +1,18 @@
 const jwt = require("jsonwebtoken");
-const UserModel = require("../models/usuarios");
+const {usuarios} = require("../models").usuarios;
 
 const auth = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
     const data = jwt.verify(token, process.env.JWT_SECRET);
-
-    const user = await UserModel.findOne({ _id: data._id, "tokens.token": token });
-    if (!user) {
+    const user = await usuarios.findOne({ 
+      id: data.id 
+    
+    });
+    if (user[0] === undefined) {
       throw new Error();
     }
-    req.user = data;
+    req.user = user;
     req.token = token;
     next();
   } catch (error) {

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const veterinarioController = require('../controllers/veterinario');
+const veterinarioController = require('../controllers/veterinarios');
 
 router.get('/', veterinarioController.getAll);
 

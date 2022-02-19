@@ -1,21 +1,15 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('citas', {
+    await queryInterface.createTable('tokens', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idMascota: {
-        type: Sequelize.INTEGER,
-        onDelete: "cascade",
-        reference:{
-          model:"mascotas",
-          key:"id",
-          as: "idMascota"
-        }
+      token: {
+        type: Sequelize.STRING
       },
       idUser: {
         type: Sequelize.INTEGER,
@@ -24,21 +18,6 @@ module.exports = {
           model:"usuarios",
           key:"id",
           as: "idUser"
-        }
-      },
-      diaCita: {
-        type: Sequelize.DATE
-      },
-      horaCita: {
-        type: Sequelize.INTEGER
-      },
-      idVeterinario: {
-        type: Sequelize.INTEGER,
-        onDelete: "cascade",
-        reference:{
-          model:"veterinarios",
-          key:"id",
-          as: "idVeterinario"
         }
       },
       createdAt: {
@@ -52,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('citas');
+    await queryInterface.dropTable('tokens');
   }
 };
