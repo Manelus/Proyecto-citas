@@ -1,4 +1,4 @@
-const users = require('../models').usuarios;
+
 const bcrypt = require('bcrypt');
 const {usuarios, mascotas, tokens, citas, veterinarios} = require('../models');
 const auth = require('../middleware/auth'); 
@@ -22,6 +22,7 @@ UsersController.getById = async function(req, res) {
 }
 
 UsersController.userRegister = async (req, res, next) => {
+  
     const {nombre, apellido, email, password} = req.body;
     console.log(usuarios);
     const userExists = await usuarios.findOne({where:{email: email}});
@@ -53,7 +54,6 @@ UsersController.userLogin = async (req, res) => {
       const login = await tokens.create({token: generarToken, idUser: user.id})
       res.status(200).json({ "user": {"email": user.email, "nombre": user.nombre}, token: generarToken })
    } catch (error) {
-     console.log(error);
       res.status(400).send(error)
    }
 }

@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 const auth = require('../middleware/auth');
 
-const MascotasController = require('../controllers/mascotas');
+const mascotasController = require('../controllers/mascotas');
  
-router.get('/', MascotasController.getAll);
+router.get('/', mascotasController.getAll);
 
-router.get('/id/:id', MascotasController.getById);
+router.get('/id/:id', auth, mascotasController.getById);
 
-router.post('/register', MascotasController.mascotaRegister);
+router.post('/register', auth, mascotasController.mascotaRegister);
 
-router.delete('/:id', MascotasController.mascotaDelete)
+router.delete('/:id', auth, mascotasController.mascotaDelete)
 
 module.exports = router;

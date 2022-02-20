@@ -4,8 +4,8 @@ const auth = require('../middleware/auth');
 
 var CitasControllers = require('../controllers/citas');
  
-router.get('/', CitasControllers.getall)
+router.get('/', auth, CitasControllers.getall)
 
-router.post('/register', CitasControllers.citaRegister);
+router.post('/register', auth, CitasControllers.citaRegister);
 
 module.exports = router;

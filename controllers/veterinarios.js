@@ -4,14 +4,12 @@ const veterinarioController = {};
 
 veterinarioController.getAll = async function (req, res) {
     const veterinario = await veterinarios.findAll();
-    let result = (veterinario.length > 0)? veterinario: [];
-    res.status(200).json(result);
+    res.status(200).json(veterinario);
 }
 
 veterinarioController.getById = async function(req, res) {
     const veterinario = await veterinarios.findOne({_id: req.params.id});
-    let result = (veterinario !== null)? veterinario: {};
-    res.status(200).json(result);
+    res.status(200).json(veterinario || {});
 }
 
 veterinarioController.veterinarioRegister = async function(req, res) {

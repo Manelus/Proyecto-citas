@@ -32,8 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     idMascota: DataTypes.INTEGER,
     idUser: DataTypes.INTEGER,
     idVeterinario: DataTypes.INTEGER,
-    diaCita: DataTypes.INTEGER,
-    horaCita: DataTypes.INTEGER
+    diaCita: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'citas',

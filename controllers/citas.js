@@ -11,12 +11,11 @@ CitasControllers.getall = async function (req, res){
 
 CitasControllers.citaRegister = async (req, res, next) => {
     try {
-        const { idMascota, idUser, diaCita, horaCita, idVeterinario } = req.body;
+        const { idMascota, idUser, diaCita, idVeterinario } = req.body;
 
         const citaExist = await citas.findAll({
             where:{
-                diaCita: diaCita,
-                horaCita: horaCita
+                diaCita: diaCita
             }
         });
         
@@ -24,10 +23,9 @@ CitasControllers.citaRegister = async (req, res, next) => {
             return res.status(401).json({message: 'ya existe una cita'});
         }
         
-        const newCita = await citas.create({ idMascota, idUser, horaCita, diaCita, idVeterinario});
+        const newCita = await citas.create({ idMascota, idUser, diaCita, idVeterinario});
         res.status(200).json(newCita);
     } catch (error) {
-        console.log(error.message);
         res.status(400).send(error);
     }
 }

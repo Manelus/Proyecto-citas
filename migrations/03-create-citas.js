@@ -29,9 +29,6 @@ module.exports = {
       diaCita: {
         type: Sequelize.DATE
       },
-      horaCita: {
-        type: Sequelize.INTEGER
-      },
       idVeterinario: {
         type: Sequelize.INTEGER,
         onDelete: "cascade",
