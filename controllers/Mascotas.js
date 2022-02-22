@@ -26,7 +26,7 @@ mascotasController.mascotaRegister = async (req, res) => {
 mascotasController.mascotaDelete = async (req, res, next) => {
     try {
       const result = await mascotas.destroy({ where: { id: req.params.id } });
-      (result > 0) ? res.status(204).json({}) : res.status(200).json({message: "El usuario a sido elimnado correctamente."});
+      (result > 0) ? res.status(204).json({}) : res.status(200).json({message: "la mascota a sido elimnado correctamente."});
     } catch (e) {
       res.status(500).json({message: "Eliminacion incorrecta."});
     }

@@ -1,8 +1,9 @@
 
 const bcrypt = require('bcrypt');
 const {usuarios, mascotas, tokens, citas, veterinarios} = require('../models');
-const auth = require('../middleware/auth'); 
 const jwt = require("jsonwebtoken");
+const token = require('../models').tokens;
+
 
 
 
@@ -58,26 +59,39 @@ UsersController.userLogin = async (req, res) => {
    }
 }
 
+UsersController.Logout = async (req, res, next) => { 
+  try {
+    const deleteToken = await token.destroy({
+      where: {
+        token: req.token
+      }
+    });
+    deleteToken === 1 ? res.status(200).json('Logout.') : res.status(200).json({});
+  } catch (e) {
+    res.status(500).json({});
+  }
+}
+
 UsersController.delete = async (req, res, next) => {
-    const id = req.params.id;
-    usuarios.destroy({
-      where: { id: id }
-    })
-      .then(id => {
-        if (id == 1) {
-          res.send({
-            message: "Usuario eliminado!"
-          });
-        } else {
-          res.send({
-            message: `no se encuentra usuario!`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "no se elimina el usuario numero: " + id
+  const id = req.params.id;
+  usuarios.destroy({
+    where: { id: id }
+  })
+    .then(id => {
+      if (id == 1) {
+        res.send({
+          message: "Usuario eliminado!"
         });
+      } else {
+        res.send({
+          message: `no se encuentra usuario!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "no se elimina el usuario numero: " + id
       });
-  };
+    });
+};
 module.exports = UsersController;
