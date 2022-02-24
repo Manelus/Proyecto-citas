@@ -18,14 +18,12 @@ UsersController.getAll = async function (req, res) {
 
 UsersController.getById = async function(req, res) {
     const user = await usuarios.findOne({_id: req.params.id});
-    let result = (user !== null)? user: {};
-    res.status(200).json(result);
+    res.status(200).json(user || {});
 }
 
 UsersController.userRegister = async (req, res, next) => {
   
     const {nombre, apellido, email, password} = req.body;
-    console.log(usuarios);
     const userExists = await usuarios.findOne({where:{email: email}});
     const cryptPass = await bcrypt.hash(password,  8);
  
@@ -53,8 +51,9 @@ UsersController.userLogin = async (req, res) => {
       if(isPasswordMatch === null)return res.status(401).json("Incorrecto")
       const generarToken = jwt.sign({id:user.id, email: user.email, nombre: user.nombre}, process.env.JWT_SECRET)
       const login = await tokens.create({token: generarToken, idUser: user.id})
-      res.status(200).json({ "user": {"email": user.email, "nombre": user.nombre}, token: generarToken })
+      res.status(200).json({ "user": {email: user.email, "nombre": user.nombre, id: user.id }, token: generarToken })
    } catch (error) {
+     console.error(error.message)
       res.status(400).send(error)
    }
 }

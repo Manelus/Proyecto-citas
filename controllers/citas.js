@@ -2,7 +2,7 @@ const {citas} = require('../models');
  
 const CitasControllers = {};
 
-CitasController.getById = async function(req, res) {
+CitasControllers.getById = async function(req, res) {
     const mascota = await citas.findOne({_id: req.params.id});
     res.status(200).json(mascota || {});
   }
