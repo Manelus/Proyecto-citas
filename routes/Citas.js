@@ -3,6 +3,8 @@ var router = express.Router();
 const auth = require('../middleware/auth'); 
 
 var CitasControllers = require('../controllers/citas');
+
+router.get('/id', auth, CitasControllers.getBiId)
  
 router.get('/', auth, CitasControllers.getall)
 
